@@ -1,0 +1,481 @@
+
+@keyframes latido {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+@keyframes aparecerSuave {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+:root {
+  --bg: #f5f2ee;
+  --card: #ffffff;
+  --primary: #d14f46;
+  --secondary: #b370ce;
+  --accent: #e90c0c;
+  --text: #2f2f2f;
+  --muted: #eb2c2c;
+}
+
+body {
+  background-color: var(--bg);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+  margin: 0;
+  padding: 3rem 1rem;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+  color: white;
+  text-align: center;
+  padding: 2.2rem 1.5rem 2.8rem;
+  border-radius: 20px;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.page-header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.5px;
+}
+.subtitulo {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.9);
+  margin-bottom: 1.8rem;
+}
+.page-header::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  width: 120%;
+  height: 80px;
+  background: rgba(255,255,255,0.12);
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 50%;
+}
+
+
+.mainNav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mainNav a {
+    background: white;
+    color: #333;
+    text-decoration: none;
+    opacity: 0.7;
+    margin: auto;
+    font-family: Impact, 'Arial Narrow Bold', sans-serif;
+    border-radius: 30px;
+    font-weight: bold;
+    padding: 0.6rem 1.4rem;
+    transition: 
+      transform 0.25s ease,
+      color 0.3s ease;
+}
+
+.mainNav a:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+  cursor: url(img/snoopy.png) 12 12, auto;
+}
+
+.mainNav a:active {
+  transform: scale(1.05);
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 100;
+}
+.tarjeta-sorpresa {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 24px;
+  max-width: 420px;
+  text-align: center;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.4s ease;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+.cerrar {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+.overlay.activo {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlay.activo .tarjeta-sorpresa {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.seccionDeContenido {
+    background: var(--card);
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
+  border-radius: 18px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.05);
+  
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+.varios {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(220px, 1fr)
+  );
+
+  gap: 1.5rem;
+}
+.varios article {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+  height: 320px;              
+  display: flex;
+  flex-direction: column;
+}
+.varios article:hover {
+  transform: translateY(-6px);
+  cursor: url(img/snoopy.png) 12 12, auto;
+}
+.img-recuerdo {
+  width: 100%;
+  height: 180px;             
+  margin-top: 1rem;
+  border-radius: 12px;
+  overflow: hidden;           
+}
+
+.img-recuerdo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;          
+  display: block;
+}
+
+.varios article::before {
+  content: "✦";
+  display: block;
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.contador {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+.unidad {
+  background: linear-gradient(135deg, var(--accent), #e6b8a2);
+  color: white;
+  border-radius: 18px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+.unidad span {
+  font-size: 2.2rem;
+  font-weight: 700;
+  display: block;
+}
+.unidad small {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+.unidad span {
+  animation: latido 1s infinite alternate;
+}
+.contador-meses {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  border-radius: 24px;
+  padding: 3rem 1rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.contador-meses span {
+  font-size: 4rem;
+  font-weight: 800;
+  display: block;
+}
+
+.contador-meses small {
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+
+
+.Stickers { min-height: 180px; }
+.Tardes { min-height: 240px; }
+.Visitas { min-height: 200px; }
+.Stickers {
+  background: linear-gradient(135deg, #ffe5ec, #ffc2d1);
+}
+
+.Tardes {
+  background: linear-gradient(135deg, #e8f8f5, #d0ece7);
+}
+
+.Visitas {
+  background: linear-gradient(135deg, #fff3cd, #ffe69c);
+}
+
+
+.grupo-sorpresas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  transform: translateY(-4px);
+  cursor: url(img/snoopy.png) 12 12 auto;
+}
+.btn-sorpresa {
+  padding: 1.2rem;
+  border-radius: 20px;
+  border: none;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #d8a47f, #b5838d);
+  color: white;
+  cursor: url(img/snoopy.png) 12 12 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+.mapa-historia {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.mapa-contenedor {
+  position: relative;
+  max-width: 900px;
+  margin: 3rem auto;
+}
+
+.mapa-base {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  filter: grayscale(100%) brightness(0.75) contrast(1.05);
+}
+
+
+.mapa-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.punto {
+  pointer-events: auto;
+  cursor: url(img/snoopy.png) 12 12 auto;
+  
+}
+
+.punto circle {
+  fill: #f56a6a;
+  opacity: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  cursor: url(img/snoopy.png) 12 12 auto;
+}
+
+.punto.importante circle {
+  filter: drop-shadow(0 0 10px rgba(207, 66, 66, 0.8));
+  cursor: url(img/snoopy.png) 12 12 auto;
+}
+
+
+.tarjeta {
+  position: absolute;
+  max-width: 260px;
+  background: rgba(255, 249, 249, 0.95);
+  color: rgb(255, 124, 124);
+  padding: 1rem;
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: url(img/snoopy.png) 12 12 auto;
+}
+
+.tarjeta h4 {
+  margin-bottom: 0.4rem;
+  color: #f56a6a;
+}
+#javeriana { top: 15%; left: 55%; }
+#bowling { top: 10%; left: 45%; }
+#gran-estacion { top: 8%; left: 30%; }
+#titan { top: 20%; left: 15%; }
+#salitre { top: 35%; left: 10%; }
+#parque { top: 45%; left: 20%; }
+#zonag { top: 60%; left: 35%; }
+
+.mapa-overlay {
+  pointer-events: auto;
+}
+
+.tarjeta {
+  pointer-events: none;
+}
+#recuerdos .recuerdo {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+#recuerdos .recuerdo img {
+  width: 100%;
+  max-width: 100%;
+  height: 180px;              
+  margin-top: 1rem;
+  border-radius: 12px;
+  object-fit: cover;          
+}
+#recuerdos video {
+  width: 100%;
+  height: 180px;
+  margin-top: 1rem;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.btn-sorpresa:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 18px 30px rgba(0,0,0,0.25);
+}
+
+.seccionDeContenido.seccion-activa {
+  opacity: 1;
+  transform: translateY(0);
+}
+.seccion-saliendo {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+p {
+  margin-bottom: 1rem;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+@keyframes aparecerSuave {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.seccionDeContenido.seccion-activa h2,
+.seccionDeContenido.seccion-activa p {
+  animation: aparecerSuave 0.6s ease both;
+}
+#mensaje {
+  position: relative;
+  overflow: hidden;
+}
+#mensaje::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80%;
+  height: 110%;
+
+  background-image: url("img/Sticker\ de\ snoopy.gif");
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+
+  opacity: 0.15;
+  filter: blur(2px);
+
+  z-index: 0;
+}
+#mensaje > * {
+  position: relative;
+  z-index: 1;
+}
